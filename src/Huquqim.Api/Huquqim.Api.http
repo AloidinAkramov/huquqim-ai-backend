@@ -1,0 +1,6 @@
+@Huquqim.Api_HostAddress = http://localhost:5179
+
+GET {{Huquqim.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

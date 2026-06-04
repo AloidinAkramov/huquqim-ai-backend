@@ -1,0 +1,25 @@
+# Build natijalari
+**/bin/
+**/obj/
+**/out/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.user
+
+# Maxfiy ma'lumotlar (HECH QACHON commit qilinmaydi)
+**/appsettings.Production.json
+**/appsettings.Local.json
+**/*credentials*.json
+**/*secret*.json
+.env
+.env.local
+
+# Frontend (alohida repoda)
+frontend/
+
+# Boshqa
+*.log
+.DS_Store
