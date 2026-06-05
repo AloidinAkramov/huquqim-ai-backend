@@ -13,7 +13,9 @@
 [![RAG](https://img.shields.io/badge/RAG-Retrieval_Augmented-0F4FB3)](#-rag--ai-qonunni-toqib-chiqarmaydi)
 [![Clean Architecture](https://img.shields.io/badge/Clean-Architecture-2ea44f)](#%EF%B8%8F-arxitektura--clean-architecture)
 
-[🌐 Jonli demo](https://huquqim-ai.vercel.app) · [Frontend repo](https://github.com/AloidinAkramov/huquqim-ai-web)
+<br/>
+
+### [![Jonli demo](https://img.shields.io/badge/🌐_JONLI_DEMO-huquqim--ai.vercel.app-0F4FB3?style=for-the-badge)](https://huquqim-ai.vercel.app) &nbsp; [![Frontend repo](https://img.shields.io/badge/💻_FRONTEND_REPO-huquqim--ai--web-14213D?style=for-the-badge&logo=github)](https://github.com/AloidinAkramov/huquqim-ai-web)
 
 </div>
 
