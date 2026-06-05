@@ -33,6 +33,57 @@ public static class TemplateSeedData
     {
         var list = new List<TemplateDef>();
 
+        // ============ RASMIY DA'VO ARIZASI (FPK — to'liq to'ldirilgan namuna) ============
+        // Maydonlarsiz — bosilganda darrov to'ldirilgan namuna docx yuklanadi.
+        list.Add(new(EDocumentType.Claim, ECaseType.Civil,
+            "Da'vo arizasi (rasmiy namuna — FPK)",
+            "To'liq to'ldirilgan rasmiy namuna. Bosing — tayyor Word hujjatni darrov yuklab oling, keyin o'zingizga moslang.",
+            Array.Empty<Field>(),
+            "[c]Chilonzor tuman (shahar) fuqarolik ishlari bo'yicha sudiga\n" +
+            "[c]**Da'vogar:** Karimov Akmal Botir o'g'li\n" +
+            "[c]yashash manzili: Toshkent sh., Chilonzor tumani, Bunyodkor ko'chasi 12-uy\n" +
+            "[c]telefon: +998 90 123 45 67   e-mail: karimov.akmal@mail.uz\n" +
+            "\n" +
+            "[c]**Javobgar:** \"TexnoSavdo\" MChJ\n" +
+            "[c]manzili (joylashgan yeri): Toshkent sh., Yunusobod tumani, Amir Temur ko'chasi 45-uy\n" +
+            "[c]telefon / rekvizitlar: +998 71 200 00 00, STIR: 301234567\n" +
+            "\n" +
+            "[c]Uchinchi shaxs (bo'lsa): —\n" +
+            "\n" +
+            "[c]**Da'vo (nizo) qiymati:** 5 000 000 so'm\n" +
+            "[c]**To'langan davlat boji:** 150 000 so'm\n" +
+            "\n" +
+            "[c]**DA'VO ARIZASI**\n" +
+            "[c]*(da'vo predmeti: qarz summasini undirish to'g'risida)*\n" +
+            "\n" +
+            "**1. Ishning holatlari**\n" +
+            "2026-yil 10-yanvarda men bilan javobgar \"TexnoSavdo\" MChJ o'rtasida No 27-sonli " +
+            "oldi-sotdi shartnomasi tuzilgan. Shartnomaga ko'ra men javobgarga 5 000 000 so'm " +
+            "miqdorida oldindan to'lov amalga oshirganman. Biroq javobgar shartnomada ko'rsatilgan " +
+            "muddatda (2026-yil 1-fevral) o'z majburiyatini bajarmadi — tovar yetkazib bermadi va " +
+            "to'langan summani ham qaytarmadi. Mening yozma talabnomamga ham javob bermadi.\n" +
+            "\n" +
+            "**2. Huquqiy asos (qonun moddalariga havola)**\n" +
+            "Yuqorida bayon etilgan holatlar va O'zbekiston Respublikasi Fuqarolik kodeksining " +
+            "327-moddasi hamda O'zbekiston Respublikasi Fuqarolik protsessual kodeksining " +
+            "188, 189 va 191-moddalariga asosan,\n" +
+            "\n" +
+            "**3. SO'RAYMAN:**\n" +
+            "1) Javobgar \"TexnoSavdo\" MChJ dan mening foydamga 5 000 000 so'm miqdoridagi " +
+            "qarz summasini undirib berishni;\n" +
+            "2) Da'vo arizasini berishda men tomonimdan to'langan 150 000 so'm davlat bojini " +
+            "javobgardan undirib berishni;\n" +
+            "3) Majburiyat bajarilmagani uchun qonunda belgilangan miqdorda penya undirib berishni.\n" +
+            "\n" +
+            "**4. Ilova qilinadigan hujjatlar (FPK 191-modda):**\n" +
+            "1. Da'vo arizasining javobgar (va uchinchi shaxslar) soni bo'yicha nusxalari;\n" +
+            "2. Davlat boji to'langanligini tasdiqlovchi hujjat (kvitansiya / to'lov topshiriqnomasi);\n" +
+            "3. Da'vo talabini asoslovchi hujjatlar nusxalari: oldi-sotdi shartnomasi, to'lov " +
+            "topshiriqnomasi, yozma talabnoma nusxasi;\n" +
+            "4. Vakil orqali berilsa — ishonchnoma yoki vakolatni tasdiqlovchi hujjat.\n" +
+            "\n" +
+            "Sana: \"____\" ____________ 20__ y.        Imzo: ____________ / Karimov A.B." + Disclaimer));
+
         // ============ ISTE'MOLCHI (Consumer) ============
         list.Add(new(EDocumentType.Pretension, ECaseType.Consumer,
             "Iste'molchi pretenziyasi (talabnoma)",

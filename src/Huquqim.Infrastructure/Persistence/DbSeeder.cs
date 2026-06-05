@@ -1,21 +1,57 @@
 using System.Text.Json;
+using Huquqim.Application.Commons.Security;
 using Huquqim.Domain.Entities.Documents;
 using Huquqim.Domain.Entities.Knowledge;
+using Huquqim.Domain.Entities.Users;
 using Huquqim.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Huquqim.Infrastructure.Persistence;
 
 /// <summary>
-/// Boshlang'ich ma'lumot: namuna qonun moddalari (bilim bazasi) va hujjat shablonlari.
-/// MVP: iste'molchi nizolari yo'nalishi.
+/// Boshlang'ich ma'lumot: demo foydalanuvchi, namuna qonun moddalari va hujjat shablonlari.
 /// </summary>
 public static class DbSeeder
 {
-    public static async Task SeedAsync(AppDbContext db)
+    public static async Task SeedAsync(
+        AppDbContext db,
+        IPasswordHasher passwordHasher,
+        string? demoEmail = null,
+        string? demoPassword = null)
     {
+        await SeedDemoUserAsync(db, passwordHasher, demoEmail, demoPassword);
         await SeedLawArticlesAsync(db);
         await SeedTemplatesAsync(db);
+    }
+
+    /// <summary>
+    /// Demo foydalanuvchi — faqat email/parol konfiguratsiyada berilgan bo'lsa yaratiladi.
+    /// Ma'lumotlar kodda emas, appsettings/env (DemoUser:Email, DemoUser:Password) orqali keladi.
+    /// </summary>
+    private static async Task SeedDemoUserAsync(
+        AppDbContext db,
+        IPasswordHasher passwordHasher,
+        string? demoEmail,
+        string? demoPassword)
+    {
+        if (string.IsNullOrWhiteSpace(demoEmail) || string.IsNullOrWhiteSpace(demoPassword))
+            return;
+
+        if (await db.Users.IgnoreQueryFilters().AnyAsync(u => u.Email == demoEmail))
+            return;
+
+        db.Users.Add(new User
+        {
+            FullName = "Demo Foydalanuvchi",
+            Email = demoEmail,
+            PasswordHash = passwordHasher.Hash(demoPassword),
+            IsEmailConfirmed = true,
+            SubscriptionTier = ESubscriptionTier.Monthly,
+            SubscriptionExpiresAt = DateTime.UtcNow.AddYears(5),
+            CreatedAt = DateTime.UtcNow
+        });
+
+        await db.SaveChangesAsync();
     }
 
     private static async Task SeedLawArticlesAsync(AppDbContext db)

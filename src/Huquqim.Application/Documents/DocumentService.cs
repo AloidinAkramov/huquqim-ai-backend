@@ -29,10 +29,16 @@ public partial class DocumentService(
             query = query.Where(t => t.CaseType == caseType.Value);
 
         var templates = await query
-            .OrderBy(t => t.Type)
             .ToListAsync(cancellationToken);
 
-        return templates.Select(MapTemplate).ToList();
+        // Rasmiy FPK da'vo arizasi — har doim eng birinchi.
+        var ordered = templates
+            .OrderByDescending(t => t.Name.Contains("rasmiy namuna"))
+            .ThenBy(t => t.Type)
+            .ThenBy(t => t.Id)
+            .ToList();
+
+        return ordered.Select(MapTemplate).ToList();
     }
 
     public async Task<Result<DocumentResponse>> GenerateAsync(
@@ -197,7 +203,9 @@ public partial class DocumentService(
         }
 
         var content = FillTemplate(template.Body, request.Values);
-        var bytes = docxGenerator.Generate(template.Name, content);
+        // Title bo'sh — shablon matnining o'zida sarlavha bor (masalan "DA'VO ARIZASI"),
+        // shuning uchun tepada shablon nomini takrorlamaymiz.
+        var bytes = docxGenerator.Generate(string.Empty, content);
         var fileName = $"{Sanitize(template.Name)}.docx";
 
         return new DocxFile(fileName, bytes);
@@ -210,13 +218,20 @@ public partial class DocumentService(
         return string.IsNullOrEmpty(safe) ? "hujjat" : safe;
     }
 
-    /// <summary>{{key}} placeholder'larni qiymatlar bilan almashtiradi.</summary>
+    /// <summary>
+    /// {{key}} placeholder'larni qiymatlar bilan almashtiradi.
+    /// To'ldirilmagan (bo'sh) maydonlar uchun to'ldirish chizig'i qo'yiladi.
+    /// </summary>
     private static string FillTemplate(string body, Dictionary<string, string> values)
     {
         return PlaceholderRegex().Replace(body, match =>
         {
             var key = match.Groups[1].Value.Trim();
-            return values.TryGetValue(key, out var value) ? value : match.Value;
+            if (values.TryGetValue(key, out var value) && !string.IsNullOrWhiteSpace(value))
+                return value;
+
+            // Bo'sh yoki yo'q — qo'lda to'ldirish uchun chiziq
+            return "__________";
         });
     }
 
