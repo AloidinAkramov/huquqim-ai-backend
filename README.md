@@ -19,6 +19,8 @@
 
 ### [![Frontend repo](https://img.shields.io/badge/💻_FRONTEND_REPO-huquqim--ai--web-14213D?style=for-the-badge&logo=github)](https://github.com/AloidinAkramov/huquqim-ai-web)
 
+### [![Loyiha taqdimoti](https://img.shields.io/badge/📑_LOYIHA_TAQDIMOTI-Huquqim__AI.pdf-EAB54A?style=for-the-badge&logoColor=white)](Huquqim_AI.pdf)
+
 </div>
 
 ---
